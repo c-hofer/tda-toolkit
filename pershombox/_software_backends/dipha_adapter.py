@@ -284,6 +284,7 @@ def persistence_diagrams_of_filtrated_cubical_complex(filtrated_cubical_complex:
         for dimension, birth, death in diagram.points:
             if dimension < 0:
                 dimension = -dimension - 1
+                death = float('inf')
 
             tmp[dimension].append((birth, death))
 
