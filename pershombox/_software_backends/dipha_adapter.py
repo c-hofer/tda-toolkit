@@ -243,7 +243,8 @@ class _PersistenceDiagramFile(_DIPHAFile):
 def persistence_diagrams_of_filtrated_cubical_complex(filtrated_cubical_complex: numpy.array,
                                                       limit_dimensions: int=None,
                                                       dual: bool=False,
-                                                      benchmark: bool=False)->[[tuple]]:
+                                                      benchmark: bool=False,
+                                                      set_inf_to_max_filt_val=False)->[[tuple]]:
     """
     Calculates the persistence diagram for a cubical complex.
 
@@ -284,7 +285,8 @@ def persistence_diagrams_of_filtrated_cubical_complex(filtrated_cubical_complex:
         for dimension, birth, death in diagram.points:
             if dimension < 0:
                 dimension = -dimension - 1
-                death = float('inf')
+                if not set_inf_to_max_filt_val:
+                    death = float('inf')
 
             tmp[dimension].append((birth, death))
 
