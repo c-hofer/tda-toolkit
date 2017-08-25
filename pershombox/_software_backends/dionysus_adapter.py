@@ -1,19 +1,23 @@
 import os
 import importlib.util
+import warnings
 
 
 ext_lib_path = os.path.join(os.path.dirname(__file__), 'ext_lib')
+__found_dionysus = False
 
 try:
     spec = importlib.util.spec_from_file_location("_dionysus", os.path.join(ext_lib_path, '_dionysus.so'))
     _dionysus = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(_dionysus)
+    __found_dionysus = True
 
 except ImportError as ex:
-    import os
-    new_ex = ImportError("It seems that there is no _dionysus.so in {}.".format(os.path.dirname(__file__)) +
-                         "You can find instructions to solve this issue in this file: {}.".format(__file__))
-    raise new_ex from ex
+    text = "It seems that there is no _dionysus.so in {}.".format(os.path.dirname(__file__)) + \
+           "You can find instructions to solve this issue in this file: {}.".format(__file__)
+
+    warnings.warn(text, ImportWarning)
+
 
 """
 Dionysus installation:
@@ -37,6 +41,7 @@ Copy the file _dionysus.so from your_build_dir/bindings/python/dionysus to the d
 
 Do NOT remove the build, since _dionysus.so links to resources there!
 """
+
 
 def PersistenceDiagram(dimension: int, points: list):
     if not isinstance(dimension, int):

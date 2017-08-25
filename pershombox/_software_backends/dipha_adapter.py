@@ -10,6 +10,7 @@ import io, os, struct
 import numpy
 import functools
 import subprocess
+import warnings
 
 from subprocess import DEVNULL
 from tempfile import TemporaryDirectory
@@ -28,13 +29,14 @@ if not os.path.exists(__dipha_path):
         subprocess.call('dipha')
 
     except FileNotFoundError:
-        raise ImportWarning(
-            """Found no dipha executable in  {}. Get it from
-            http://people.maths.ox.ac.uk/nanda/perseus/index.html and copy
-            it into {} or set the __dipha_path variable
-            of this module manually after import.
-            """.format(__dipha_path, __ext_lib_path)
-        )
+
+        text = """Found no dipha executable in  {}. Get it from
+                http://people.maths.ox.ac.uk/nanda/perseus/index.html and copy
+                it into {} or set the __dipha_path variable
+                of this module manually after import.
+                """.format(__dipha_path, __ext_lib_path)
+
+        warnings.warn(text, ImportWarning)
 
 
 __tmp_dir_fact = TemporaryDirectory
