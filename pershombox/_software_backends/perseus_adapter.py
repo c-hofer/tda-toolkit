@@ -10,7 +10,7 @@ __ext_lib_path = os.path.join(os.path.dirname(__file__), 'ext_lib')
 
 __perseus_path = os.path.join(__ext_lib_path, 'perseusLin')
 
-if not os.path.exists(__perseus_path):
+if not os.path.isfile(__perseus_path):
 
     text  = """Found no perseusLin executable in  {}. Get it from
             http://people.maths.ox.ac.uk/nanda/perseus/index.html and copy

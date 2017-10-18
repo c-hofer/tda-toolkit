@@ -24,9 +24,9 @@ __ext_lib_path = os.path.join(os.path.dirname(__file__), 'ext_lib')
 __dipha_path = os.path.join(__ext_lib_path, 'dipha')
 
 
-if not os.path.exists(__dipha_path):
+if not os.path.isfile(__dipha_path):
     try:
-        subprocess.call('dipha')
+        subprocess.call('dipha', stdout=DEVNULL, stderr=DEVNULL)
 
     except FileNotFoundError:
 
@@ -92,7 +92,7 @@ def _run_dipha(input_file, output_file, limit_dimensions: int=None, dual: bool=F
 
         args += [input_file, output_file]
 
-        p = subprocess.Popen(["dipha",  *args], stdout=DEVNULL)
+        p = subprocess.Popen(["dipha",  *args], stdout=DEVNULL, stderr=DEVNULL)
         p.wait()
     except FileNotFoundError:
         raise DiphaAdapterException("The program dipha seems not to be installed. "
