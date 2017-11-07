@@ -8,18 +8,19 @@ import warnings
 
 __ext_lib_path = os.path.join(os.path.dirname(__file__), 'ext_lib')
 
-__perseus_path = os.path.join(__ext_lib_path, 'perseusLin')
+
+perseus_path = os.path.join(__ext_lib_path, 'perseus')
 
 
 _no_perseus_binary_error_text = \
-"""Found no perseusLin executable in  {}. Get it from
+"""Found no 'perseus' executable in  {}. Get it from
 http://people.maths.ox.ac.uk/nanda/perseus/index.html and copy
 it into {} or set the perseus_path variable
 of this module after import manually.
-            """.format(__perseus_path, __ext_lib_path)
+            """.format(perseus_path, __ext_lib_path)
 
 
-if not os.path.isfile(__perseus_path):
+if not os.path.isfile(perseus_path):
     warnings.warn(_no_perseus_binary_error_text, ImportWarning)
 
 
@@ -35,7 +36,7 @@ def _call_perseus(complex_type, complex_file_string):
             comp_file.write(complex_file_string)
 
         try:
-            call([__perseus_path, complex_type, comp_file_path, tmp_dir + '/'], stdout=DEVNULL)
+            call([perseus_path, complex_type, comp_file_path, tmp_dir + '/'], stdout=DEVNULL)
 
         except FileNotFoundError:
             raise PerseusAdapterException(_no_perseus_binary_error_text)
