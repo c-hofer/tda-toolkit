@@ -19,24 +19,24 @@ Name to `perseus`.
 # Main features
 A short overview of the main features. For each of them exists a tutorial in the `tutorials` subfolder.
 
-###`toplex_persistence_diagrams`###<b>
-Uses `Perseus` to calculate persistence diagrams of filtrated Toplex. [tutorial](https://github.com/c-hofer/tda-toolkit/blob/tutorials_and_readme/tutorials/toplex_persistence_diagrams.ipynb)
+### `toplex_persistence_diagrams`
+Uses `Perseus` to calculate persistence diagrams of filtrated Toplex. [Tutorial](https://github.com/c-hofer/tda-toolkit/blob/tutorials_and_readme/tutorials/toplex_persistence_diagrams.ipynb)
 
-###`cubical_complex_persistence_diagrams`<b>
-Uses `DIPHA` to calculate persistence diagrams of a filtrated cubical complex.
+### `cubical_complex_persistence_diagrams`
+Uses `DIPHA` to calculate persistence diagrams of a filtrated cubical complex. [Tutorial](https://github.com/c-hofer/tda-toolkit/blob/tutorials_and_readme/tutorials/cubical_complex_persistence_diagrams.ipynb)
 
-###`calculate_discrete_NPHT_2d`###<b>
-Calculates a *normalized barycentric persistent homology transform* of a given binary 2D cubical complex.
+### `calculate_discrete_NPHT_2d`### 
+Calculates a *normalized barycentric persistent homology transform* of a given binary 2D cubical complex.[Tutorial](tda-toolkit/tutorials/discrete_2d_npht.ipynb)
 
-###`calculate_discrete_NPHT_3d_Lebedev26`###<b>
+### `calculate_discrete_NPHT_3d_Lebedev26`
 Calculates a *normalized barycentric persistent homology transform* (residing on 
 the 26-points Lebedev grid) of a given binary 3D cubical complex.
 See [1].
 
-###`distance_npht2D`###
+### `distance_npht2D`
 Calculates the 'shape' distance between two 2D persistent homology transforms. 
 
-###`distance_npht3D_lebedev_26`###
+### `distance_npht3D_lebedev_26` 
 Calculates the 'shape' distance between two 3D persistent homology transforms. See [1].
 
 # References 
