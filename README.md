@@ -25,8 +25,8 @@ Uses `Perseus` to calculate persistence diagrams of filtrated Toplex. [Tutorial]
 ### `cubical_complex_persistence_diagrams`
 Uses `DIPHA` to calculate persistence diagrams of a filtrated cubical complex. [Tutorial](https://github.com/c-hofer/tda-toolkit/blob/tutorials_and_readme/tutorials/cubical_complex_persistence_diagrams.ipynb)
 
-### `calculate_discrete_NPHT_2d`### 
-Calculates a *normalized barycentric persistent homology transform* of a given binary 2D cubical complex.[Tutorial](tda-toolkit/tutorials/discrete_2d_npht.ipynb)
+### `calculate_discrete_NPHT_2d`
+Calculates a *normalized barycentric persistent homology transform* of a given binary 2D cubical complex.[Tutorial](https://github.com/c-hofer/tda-toolkit/blob/tutorials_and_readme/tutorials/discrete_2d_npht.ipynb)
 
 ### `calculate_discrete_NPHT_3d_Lebedev26`
 Calculates a *normalized barycentric persistent homology transform* (residing on 
