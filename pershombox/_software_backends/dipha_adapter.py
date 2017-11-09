@@ -10,34 +10,21 @@ import io, os, struct
 import numpy
 import functools
 import subprocess
-import warnings
 
 from subprocess import DEVNULL
 from tempfile import TemporaryDirectory
+from .resource_handler import get_path, Backends
+
+
+__stdout = DEVNULL
+__stderr = DEVNULL
 
 
 # region module resources
 
 
-__ext_lib_path = os.path.join(os.path.dirname(__file__), 'ext_lib')
-
-
-__dipha_path = os.path.join(__ext_lib_path, 'dipha')
-
-
-if not os.path.isfile(__dipha_path):
-    try:
-        subprocess.call('dipha', stdout=DEVNULL, stderr=DEVNULL)
-
-    except FileNotFoundError:
-
-        text = """Found no dipha executable in  {}. Get it from
-                http://people.maths.ox.ac.uk/nanda/perseus/index.html and copy
-                it into {} or set the __dipha_path variable
-                of this module manually after import.
-                """.format(__dipha_path, __ext_lib_path)
-
-        warnings.warn(text, ImportWarning)
+def _get_dipha_path():
+    return get_path(Backends.dipha)
 
 
 __tmp_dir_fact = TemporaryDirectory
@@ -78,26 +65,22 @@ def _unpack_from_file(f: io.BufferedReader, type):
 
 
 def _run_dipha(input_file, output_file, limit_dimensions: int=None, dual: bool=False, benchmark: bool=False):
-    try:
-        args = []
+    args = []
 
-        if limit_dimensions is not None:
-            args.append("--upper_dim")
-            args.append(str(int(limit_dimensions)))
+    if limit_dimensions is not None:
+        args.append("--upper_dim")
+        args.append(str(int(limit_dimensions)))
 
-        if dual:
-            args.append("--dual")
+    if dual:
+        args.append("--dual")
 
-        if benchmark:
-            args.append("--benchmark")
+    if benchmark:
+        args.append("--benchmark")
 
-        args += [input_file, output_file]
+    args += [input_file, output_file]
 
-        p = subprocess.Popen(["dipha",  *args], stdout=DEVNULL, stderr=DEVNULL)
-        p.wait()
-    except FileNotFoundError:
-        raise DiphaAdapterException("The program dipha seems not to be installed. "
-                                    "Get it from https://github.com/DIPHA/dipha")
+    p = subprocess.Popen([_get_dipha_path(),  *args], stdout=__stdout, stderr=__stderr)
+    p.wait()
 
 # endregion
 
