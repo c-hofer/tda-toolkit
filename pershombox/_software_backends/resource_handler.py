@@ -59,7 +59,7 @@ def get_path(backend: Backends)->str:
     path_or_error = __paths_or_errors[backend]
 
     if isinstance(path_or_error, Exception):
-        ex_text = "{}'s backend software is not available.".format(backend.value)
+        ex_text = "{} backend software is not available.".format(backend.value)
         new_ex = SoftwareBackendError(ex_text)
         raise new_ex from path_or_error
 

@@ -1,27 +1,17 @@
+import os
+import numpy
 from subprocess import call
 from tempfile import TemporaryDirectory
 from subprocess import DEVNULL
-import os
-import numpy
-import warnings
+from .resource_handler import get_path, Backends
 
 
-__ext_lib_path = os.path.join(os.path.dirname(__file__), 'ext_lib')
+__stdout = DEVNULL
+__stderr = DEVNULL
 
 
-perseus_path = os.path.join(__ext_lib_path, 'perseus')
-
-
-_no_perseus_binary_error_text = \
-"""Found no 'perseus' executable in  {}. Get it from
-http://people.maths.ox.ac.uk/nanda/perseus/index.html and copy
-it into {} or set the perseus_path variable
-of this module after import manually.
-            """.format(perseus_path, __ext_lib_path)
-
-
-if not os.path.isfile(perseus_path):
-    warnings.warn(_no_perseus_binary_error_text, ImportWarning)
+def _get_perseus_path():
+    return get_path(Backends.perseus)
 
 
 def _call_perseus(complex_type, complex_file_string):
@@ -32,14 +22,12 @@ def _call_perseus(complex_type, complex_file_string):
 
     with TemporaryDirectory() as tmp_dir:
         comp_file_path = os.path.join(tmp_dir, 'complex.txt')
+        perseus_path = _get_perseus_path()
+
         with open(comp_file_path, 'w') as comp_file:
             comp_file.write(complex_file_string)
 
-        try:
-            call([perseus_path, complex_type, comp_file_path, tmp_dir + '/'], stdout=DEVNULL)
-
-        except FileNotFoundError:
-            raise PerseusAdapterException(_no_perseus_binary_error_text)
+        call([perseus_path, complex_type, comp_file_path, tmp_dir + '/'], stdout=__stdout, stderr=__stderr)
 
         # dgm file names are assumed to be like output_0.txt
         diagram_files = [name for name in os.listdir(tmp_dir) if name.startswith('_') and name != '_betti.txt']
