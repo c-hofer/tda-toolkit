@@ -76,7 +76,7 @@ def toplex_persistence_diagrams(toplices: [tuple], filtration_values: []):
     Calculates the persistence diagrams for the given toplex using the given
     filtration. A toplex is a notion of a simplicial complex where just the
     highest dimensional simplices are noted, i.e. toplex
-    {[1,2}] stands for the simplicial complex {[1], [2], [1,2]}
+    {[1,2]} stands for the simplicial complex {[1], [2], [1,2]}
 
     :param toplices: List of toplices given as numeric tuples.
     The numeric value of each dimension of a toplix tuple stands

@@ -9,6 +9,7 @@ from .lebedev import lebedev_26_integration, \
 
 from ._software_backends.dionysus_adapter import wasserstein_distance
 
+
 class Distance_NPHT_2d:
     def __init__(self, p=2, included_dimensions=(0, 1), minimize_over_rotations=True):
         """
@@ -89,8 +90,7 @@ class DistanceNPHT3D_Lebedev26:
         """
         Parameters
         ----------
-        p:
-            int. p-parameter of the Wasserstein distance used inside.
+        p: int. p-parameter of the Wasserstein distance used inside.
         included_dimensions :
             tuple.Controls which dimensions of the npht are used.
             (0,1,2) -> dimension 0, 1, 2
@@ -161,3 +161,77 @@ class DistanceNPHT3D_Lebedev26:
         if t_1.keys() != t_2.keys():
             raise ValueError("Expected t_1.keys() == t_2.keys()")
 
+
+# region functional interface
+
+
+def distance_npht2D(npht_1: [[[]]],
+                    npht_2: [[[]]],
+                    p=2,
+                    included_dimensions=(0, 1),
+                    minimize_over_rotations=True)->float:
+    """
+    Calculate the approximated npht distance between npht_1 and npht_2.
+
+    Parameters
+    ----------
+    npht_1 : [[[]]]. Discretised npht over equidistant distributed directions on S^1.
+
+            t_1[i][j] persistence diagram of dimension j in direction i.
+
+    npht_2 : like npht_1
+
+    p : int. p-parameter of the Wasserstein distance used inside.
+
+    included_dimensions : tuple. Controls which dimensions of the npht are used.
+            (0,1) -> dimension 0 and 1
+            (0)   -> dimension 0
+            (1)   -> dimension 1
+
+    minimize_over_rotations : bool. If false the min over the rotation group is not searched.
+
+    Returns
+    -------
+    """
+    f = Distance_NPHT_2d(p=p,
+                         included_dimensions=included_dimensions,
+                         minimize_over_rotations=minimize_over_rotations)
+
+    return f(npht_1, npht_2)
+
+
+def distance_npht3D_lebedev_26(npht_1: [[[]]],
+                               npht_2: [[[]]],
+                               p: int = 2,
+                               included_dimensions: tuple = (0, 1, 2),
+                               minimize_over_rotations=True)->float:
+    """
+    Calculate the approximated npht distance between npht_1 and npht_2.
+
+    Parameters
+    ----------
+    npht_1 : [[[]]]. Discretised npht over 26 point Lebedev Grid.
+
+            t_1[lebedev_point][j] persistence diagram of dimension j in direction lebedev_point.
+    npht_2 : like npht_1
+    p : int. p-parameter of the Wasserstein distance used inside.
+
+    included_dimensions : tuple. Controls which dimensions of the npht are used.
+            (0,1,2) -> dimension 0, 1, 2
+            (0)   -> dimension 0
+            ...
+            (0, 2)   -> dimension 0, 2
+
+    minimize_over_rotations : bool. If false the min over the rotation group is not searched.
+
+    Returns
+    -------
+    """
+    f = DistanceNPHT3D_Lebedev26(p=p,
+                                 included_dimensions=included_dimensions,
+                                 minimize_over_rotations=minimize_over_rotations)
+
+    return f(npht_1, npht_2)
+
+
+# endregion
