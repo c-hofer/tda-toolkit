@@ -19,6 +19,17 @@ Where to find the executables/sources and how to name the executable is listed b
 Rename to `perseus`.
 3. `Dionysus`? (planned to support Dionysus 2)
 
+## Exemplary DIPHA installation
+
+```bash
+git clone https://github.com/DIPHA/dipha.git
+cd dipha
+mkdir build
+cmake ..
+make -j4
+cp dipha <PATH_TO_TDA_TOOLKIT>/pershombox/_software_backends/ext_lib
+```
+
 # Main features
 A short overview of the main features. For each of feature, there exists a tutorial in the 
 `tutorials` subfolder.
@@ -47,7 +58,7 @@ in [1].
 # References 
 [[1]](http://wwwx.cs.unc.edu/~mn/sites/default/files/hofer2017_ipmi.pdf) 
 C. Hofer, R. Kwitt, M. Niethammer, Y. Hoeller, E. Trinka and A. Uhl.    
-*Constructing Shape Spaces from a Topological Perspective*, In: IPMI, 2017
+**Constructing Shape Spaces from a Topological Perspective**, In: IPMI, 2017
 ```bash
 @inproceedings{Hofer17a,
   author    = {C.~Hofer, R.~Kwitt, M.~Niethammer, Y.~Hoeller, E.~Trinka and A.~Uhl},
@@ -57,8 +68,8 @@ C. Hofer, R. Kwitt, M. Niethammer, Y. Hoeller, E. Trinka and A. Uhl.
 ```
 
 [[2]](https://arxiv.org/abs/1707.04041) 
-C. Hofer, R. Kwitt, M. Niethammer and A. Uhl. *Deep Learning with Topological Signatures*,
-In: NIPS, 2017
+C. Hofer, R. Kwitt, M. Niethammer and A. Uhl.     
+**Deep Learning with Topological Signatures**, In: NIPS, 2017
 ```bash
 @inproceedings{Hofer17b,
   author    = {C.~Hofer, R.~Kwitt, M.~Niethammer, and A.~Uhl},
