@@ -43,7 +43,9 @@ Calculates the 'shape' distance between two 3D persistent homology transforms, p
 in [1].
 
 # References 
-[[1]](http://wwwx.cs.unc.edu/~mn/sites/default/files/hofer2017_ipmi.pdf)
+[[1]](http://wwwx.cs.unc.edu/~mn/sites/default/files/hofer2017_ipmi.pdf) 
+C. Hofer, R. Kwitt, M. Niethammer, Y. Hoeller, E. Trinka and A. Uhl.    
+*Constructing Shape Spaces from a Topological Perspective*, In: IPMI, 2017
 ```bash
 @inproceedings{Hofer17a,
   author    = {C.~Hofer, R.~Kwitt, M.~Niethammer, Y.~Hoeller, E.~Trinka and A.~Uhl},
