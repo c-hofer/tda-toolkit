@@ -7,3 +7,5 @@ from .pht import calculate_discrete_NPHT_3d_Lebedev26
 
 from .pht_metric import distance_npht2D
 from .pht_metric import distance_npht3D_lebedev_26
+
+from ._software_backends.resource_handler import get_backend_cfg_errors
