@@ -1,7 +1,7 @@
 import os
 import warnings
 from configparser import ConfigParser
-from subprocess import call
+from subprocess import call, DEVNULL
 from enum import Enum
 
 
@@ -46,7 +46,7 @@ def init_backend(backend: Backends):
         path = __fall_backs[backend]
 
     try:
-        call([path])
+        call([path], stdout=DEVNULL, stderr=DEVNULL)
 
     except Exception as ex:
         __paths_or_errors[backend] = ex
