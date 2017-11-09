@@ -1,7 +1,9 @@
 # tda-toolkit
 
-This repository contains persistent homology related code. A final code release
-is planned for late 2017.
+This repository contains persistent homology related code which can be used 
+to implement the approaches from [1] and [2] (see References).
+
+*A final code release is planned for late 2017.*
 
 # Installation
 
@@ -51,6 +53,17 @@ C. Hofer, R. Kwitt, M. Niethammer, Y. Hoeller, E. Trinka and A. Uhl.
   author    = {C.~Hofer, R.~Kwitt, M.~Niethammer, Y.~Hoeller, E.~Trinka and A.~Uhl},
   title     = {Constructing Shape Spaces from a Topological Perspective},
   booktitle = {IPMI},
+  year      = {2017}}
+```
+
+[[2]](http://wwwx.cs.unc.edu/~mn/sites/default/files/hofer2017_ipmi.pdf) 
+C. Hofer, R. Kwitt, M. Niethammer and A. Uhl. *Deep Learning with Topological Signatures*,
+In: NIPS, 2017
+```bash
+@inproceedings{Hofer17b,
+  author    = {C.~Hofer, R.~Kwitt, M.~Niethammer, and A.~Uhl},
+  title     = {Deep Learning with Topological Signatures},
+  booktitle = {NIPS},
   year      = {2017}}
 ```
 
