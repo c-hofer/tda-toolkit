@@ -1,7 +1,7 @@
 # tda-toolkit
 
 This repository contains persistent homology related code which can be used 
-to implement the approaches from [1] and [2] (see [References](#Referenes))
+to implement the approaches from [1] and [2] (see [References](#references))
 
 *A final code release is planned for late 2017.*
 
