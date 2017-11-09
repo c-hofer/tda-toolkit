@@ -14,19 +14,19 @@ __cfg_path = os.path.join(os.path.dirname(__file__), __CFG_FILE_NAME)
 class Backends(Enum):
     dipha = 'dipha'
     perseus = 'perseus'
-    hera = 'hera'
+    hera_wasserstein_dist = 'hera_wasserstein_dist'
 
 
 __fall_backs = {
     Backends.dipha: 'dipha',
-    Backends.hera: 'hera',
+    Backends.hera_wasserstein_dist: 'hera',
     Backends.perseus: 'perseus'
 }
 
 
 __paths_or_errors = {
    Backends.dipha: None,
-   Backends.hera: None,
+   Backends.hera_wasserstein_dist: None,
    Backends.perseus: None
 }
 
