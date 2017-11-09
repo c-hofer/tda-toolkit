@@ -86,9 +86,6 @@ def init_software_backends():
             error_text += (b) + '\n'
 
         error_text += "Using stuff dependent on those backends will cause runtime errors.\n"
-        error_text += "You can get all errors by calling pershombox.get_backend_cfg_errors()."
+        error_text += "You can get all errors by calling pershombox.get_backend_cfg_errors().\n"
 
-        print(error_text)
-        # warnings.warn(error_text, ImportError)
-
-
+        warnings.warn(error_text, UserWarning)
