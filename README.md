@@ -17,7 +17,8 @@ Where to find the executables/sources and how to name the executable is listed b
 1. `DIPHA`: [Source code](https://github.com/DIPHA/dipha). Rename to `dipha`.
 2. `Perseus`: [Source code or precompiled executables](http://people.maths.ox.ac.uk/nanda/perseus/index.html). 
 Rename to `perseus`.
-3. `Dionysus`? (planned to support Dionysus 2)
+
+We plan to also support [Dionysus (v2)](http://mrzv.org/software/dionysus2/) in the future.
 
 ## Exemplary DIPHA installation
 
