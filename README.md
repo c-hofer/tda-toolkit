@@ -8,15 +8,22 @@ to implement the approaches from [1] and [2] (see [References](#references))
 # Installation
 
 The `pershombox` package is dependent on some third party software tools which we do not provide here.
-Each of those dependencies yields an executable which you have to copy to 
-`pershombox/_software_backends/ext_lib`.
+In order to install `pershombox` you have to get those executables and tell `pershombox` where 
+ to find them by editing the corresponding entry in 
+ `pershombox/_software_backends/software_backends.cfg`.
 
-Where to find the executables/sources and how to name the executable is listed below. 
+Where to find the executables/sources and which `software_backends.cfg` entry corresponds to them 
+is listed below. 
 **Do not forget to `chmod` executables on Unix-based systems!**
 
-1. `DIPHA`: [Source code](https://github.com/DIPHA/dipha). Rename to `dipha`.
+1. `DIPHA`: [Source code](https://github.com/DIPHA/dipha). 
+Entry: `dipha`.
+
 2. `Perseus`: [Source code or precompiled executables](http://people.maths.ox.ac.uk/nanda/perseus/index.html). 
-Rename to `perseus`.
+Entry: `perseus`.
+
+3. `hera`: [Source code](https://bitbucket.org/grey_narn/hera.git). 
+We need the `wasserstein_dist` executable in `geom_matching/wasserstein`. Entry: `hera_wasserstein_dist`.
 
 We plan to also support [Dionysus (v2)](http://mrzv.org/software/dionysus2/) in the future.
 
@@ -28,7 +35,21 @@ cd dipha
 mkdir build
 cmake ..
 make -j4
-cp dipha <PATH_TO_TDA_TOOLKIT>/pershombox/_software_backends/ext_lib
+```
+
+Then manipulate the `software_backends.cfg`: 
+
+```bash
+[paths]
+# Configure the paths to the backend software here
+# e.g., dipha=/home/myHome/dipha
+# do not forget to chmod +x on unix bases systems
+
+dipha=<path/to/your/dipha/executable/here> # <-- This is your modification
+
+hera_wasserstein_dist=
+
+perseus=
 ```
 
 # Main features
