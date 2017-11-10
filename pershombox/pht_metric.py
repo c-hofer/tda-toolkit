@@ -11,13 +11,21 @@ from ._software_backends.hera_adapter import wasserstein_distance
 
 
 class Distance_NPHT_2d:
-    def __init__(self, p=2, included_dimensions=(0, 1), minimize_over_rotations=True):
+    def __init__(self,
+                 wasserstein_degree=2,
+                 wasserstein_internal_norm=2,
+                 included_dimensions=(0, 1),
+                 minimize_over_rotations=True):
         """
 
         Parameters
         ----------
-        p:
+        wasserstein_degree:
             int. p-parameter of the Wasserstein distance used inside.
+
+        wasserstein_internal_norm:
+            int or str. Internal norm used in wasserstein dist. Use 'inf' to set to ininity norm or q >= 1 for q-norm.
+
         included_dimensions :
             Controls which dimensions of the npht are used.
             (0,1) -> dimension 0 and 1
@@ -26,7 +34,8 @@ class Distance_NPHT_2d:
         minimize_over_rotations:
             bool. If false the min over the rotation group is not searched.
         """
-        self.p = int(p)
+        self.p = wasserstein_degree
+        self.q = wasserstein_internal_norm
         self.included_dimensions = included_dimensions
         self.minimize_over_rotations = bool(minimize_over_rotations)
 
@@ -64,7 +73,7 @@ class Distance_NPHT_2d:
                 dgm_t_2_dir = [t_2[(i + shift) % n][dim] for dim in self.included_dimensions]
 
                 y = sum(
-                    [wasserstein_distance(dgm_c_1, dgm_c_2, self.p)
+                    [wasserstein_distance(dgm_c_1, dgm_c_2, degree=self.p, internal_norm=self.q)
                      for dgm_c_1, dgm_c_2
                      in zip(dgm_t_1_dir, dgm_t_2_dir)])
                 ordinates_shifted.append(y)
@@ -84,13 +93,18 @@ class Distance_NPHT_2d:
 
 class DistanceNPHT3D_Lebedev26:
     def __init__(self,
-                 p: int=2,
+                 wasserstein_degree: int=2,
+                 wasserstein_internal_norm=2,
                  included_dimensions: tuple=(0, 1, 2),
                  minimize_over_rotations=True):
         """
         Parameters
         ----------
-        p: int. p-parameter of the Wasserstein distance used inside.
+        wasserstein_degree: int. p-parameter of the Wasserstein distance used inside.
+
+        wasserstein_internal_norm:
+            int or str. Internal norm used in wasserstein dist. Use 'inf' to set to ininity norm or q >= 1 for q-norm.
+
         included_dimensions :
             tuple.Controls which dimensions of the npht are used.
             (0,1,2) -> dimension 0, 1, 2
@@ -100,7 +114,8 @@ class DistanceNPHT3D_Lebedev26:
         minimize_over_rotations:
             bool. If false the min over the rotation group is not searched.
         """
-        self.p = int(p)
+        self.p = wasserstein_degree
+        self.q = wasserstein_internal_norm
         self.included_dimensions = tuple(included_dimensions)
         self.minimize_over_rotations = bool(minimize_over_rotations)
 
@@ -135,7 +150,8 @@ class DistanceNPHT3D_Lebedev26:
             diagrams_t_2 = t_2[lebedev_point]
 
             value = sum([
-                            wasserstein_distance(diagrams_t_1[dim], diagrams_t_2[dim], self.p)
+                            wasserstein_distance(diagrams_t_1[dim], diagrams_t_2[dim],
+                                                 degree=self.p, internal_norm=self.q)
                             for dim in range(3) if dim in self.included_dimensions
                             ])
 
@@ -167,7 +183,8 @@ class DistanceNPHT3D_Lebedev26:
 
 def distance_npht2D(npht_1: [[[]]],
                     npht_2: [[[]]],
-                    p=2,
+                    wasserstein_degree=2,
+                    wasserstein_internal_norm=2,
                     included_dimensions=(0, 1),
                     minimize_over_rotations=True)->float:
     """
@@ -181,7 +198,10 @@ def distance_npht2D(npht_1: [[[]]],
 
     npht_2 : like npht_1
 
-    p : int. p-parameter of the Wasserstein distance used inside.
+    wasserstein_degree : int. p-parameter of the Wasserstein distance used inside.
+    
+    wasserstein_internal_norm:
+            int or str. Internal norm used in wasserstein dist. Use 'inf' to set to ininity norm or q >= 1 for q-norm.
 
     included_dimensions : tuple. Controls which dimensions of the npht are used.
             (0,1) -> dimension 0 and 1
@@ -193,7 +213,8 @@ def distance_npht2D(npht_1: [[[]]],
     Returns
     -------
     """
-    f = Distance_NPHT_2d(p=p,
+    f = Distance_NPHT_2d(wasserstein_degree=wasserstein_degree,
+                         wasserstein_internal_norm=wasserstein_internal_norm,
                          included_dimensions=included_dimensions,
                          minimize_over_rotations=minimize_over_rotations)
 
@@ -202,7 +223,8 @@ def distance_npht2D(npht_1: [[[]]],
 
 def distance_npht3D_lebedev_26(npht_1: [[[]]],
                                npht_2: [[[]]],
-                               p: int = 2,
+                               wasserstein_degree: int=2,
+                               wasserstein_internal_norm=2,
                                included_dimensions: tuple = (0, 1, 2),
                                minimize_over_rotations=True)->float:
     """
@@ -214,7 +236,11 @@ def distance_npht3D_lebedev_26(npht_1: [[[]]],
 
             t_1[lebedev_point][j] persistence diagram of dimension j in direction lebedev_point.
     npht_2 : like npht_1
-    p : int. p-parameter of the Wasserstein distance used inside.
+
+    wasserstein_degree : int. p-parameter of the Wasserstein distance used inside.
+
+    wasserstein_internal_norm:
+            int or str. Internal norm used in wasserstein dist. Use 'inf' to set to ininity norm or q >= 1 for q-norm.
 
     included_dimensions : tuple. Controls which dimensions of the npht are used.
             (0,1,2) -> dimension 0, 1, 2
@@ -227,7 +253,8 @@ def distance_npht3D_lebedev_26(npht_1: [[[]]],
     Returns
     -------
     """
-    f = DistanceNPHT3D_Lebedev26(p=p,
+    f = DistanceNPHT3D_Lebedev26(wasserstein_degree=wasserstein_degree,
+                                 wasserstein_internal_norm=wasserstein_internal_norm,
                                  included_dimensions=included_dimensions,
                                  minimize_over_rotations=minimize_over_rotations)
 

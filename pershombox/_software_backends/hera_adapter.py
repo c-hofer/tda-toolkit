@@ -22,8 +22,8 @@ def wasserstein_distance(dgm_1: [[]], dgm_2: [[]], degree: float=2.0, internal_n
     ----------
     dgm_1
     dgm_2
-    degree
-    internal_norm
+    degree: Wasserstein degree
+    internal_norm: Internal norm used. 'inf' sets to infinity norm, q >= 1 to q-norm.
     relative_error
 
     Returns
