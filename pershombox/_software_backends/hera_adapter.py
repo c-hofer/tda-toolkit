@@ -10,11 +10,29 @@ __stdout = DEVNULL
 __stderr = DEVNULL
 
 
-def get_hera_wasserstein_dist_path():
+def _get_hera_wasserstein_dist_path():
     return get_path(Backends.hera_wasserstein_dist)
 
 
 def wasserstein(dgm_1: [[]], dgm_2: [[]], degree: float=2.0, internal_norm='inf', relative_error: float=0.01)->float:
+    """
+    Calculates wasserstein distance of two persistence diagrams.
+
+    Parameters
+    ----------
+    dgm_1
+    dgm_2
+    degree
+    internal_norm
+    relative_error
+
+    Returns
+    -------
+
+    """
+
+    # region parameter checking
+
     degree = float(degree)
     if degree < 1.0:
         raise ValueError("""Value range of parameter degree is [1, inf) given was {}""".format(degree))
@@ -33,6 +51,8 @@ def wasserstein(dgm_1: [[]], dgm_2: [[]], degree: float=2.0, internal_norm='inf'
         raise ValueError("""Value range of parameter relative_error is [0, inf) given was {}""".format(relative_error))
     relative_error = '{:.10f}'.format(relative_error)
 
+    #endregion
+
     with TemporaryDirectory() as tmp_dir:
         dgm_1_file_path = os.path.join(tmp_dir, 'dgm_1')
         dgm_2_file_path = os.path.join(tmp_dir, 'dgm_2')
@@ -40,7 +60,7 @@ def wasserstein(dgm_1: [[]], dgm_2: [[]], degree: float=2.0, internal_norm='inf'
         numpy.savetxt(dgm_1_file_path, numpy.array(dgm_1), delimiter=' ')
         numpy.savetxt(dgm_2_file_path, numpy.array(dgm_2), delimiter=' ')
 
-        cmd = [get_hera_wasserstein_dist_path(),
+        cmd = [_get_hera_wasserstein_dist_path(),
                dgm_1_file_path,
                dgm_2_file_path,
                degree,
