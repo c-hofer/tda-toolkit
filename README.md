@@ -72,6 +72,7 @@ See [1].
 
 ### `distance_npht2D`
 Calculates the 'shape' distance between two 2D persistent homology transforms. 
+[Tutorial](https://github.com/c-hofer/tda-toolkit/blob/tutorials_and_readme/tutorials/discrete_2d_npht.ipynb)
 
 ### `distance_npht3D_lebedev_26` 
 Calculates the 'shape' distance between two 3D persistent homology transforms, proposed
