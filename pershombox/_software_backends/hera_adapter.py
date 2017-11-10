@@ -14,9 +14,9 @@ def _get_hera_wasserstein_dist_path():
     return get_path(Backends.hera_wasserstein_dist)
 
 
-def wasserstein(dgm_1: [[]], dgm_2: [[]], degree: float=2.0, internal_norm='inf', relative_error: float=0.01)->float:
+def wasserstein_distance(dgm_1: [[]], dgm_2: [[]], degree: float=2.0, internal_norm='inf', relative_error: float=0.01)->float:
     """
-    Calculates wasserstein distance of two persistence diagrams.
+    Calculates wasserstein_distance distance of two persistence diagrams.
 
     Parameters
     ----------

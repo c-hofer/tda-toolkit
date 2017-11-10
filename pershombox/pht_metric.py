@@ -7,7 +7,7 @@ from .lebedev import lebedev_26_integration, \
     LebedevGrid26
 
 
-from ._software_backends.dionysus_adapter import wasserstein_distance
+from ._software_backends.hera_adapter import wasserstein_distance
 
 
 class Distance_NPHT_2d:
