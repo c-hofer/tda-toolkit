@@ -2,8 +2,9 @@ from ._software_backends.perseus_adapter import _call_perseus
 
 
 class Toplex:
-    def __init__(self, toplices: [tuple], filtration_values: []):
+    def __init__(self, toplices: [tuple], filtration_values: [], deessentialize=False):
         self.simplices = [tuple(t) for t in toplices]
+        self.deessentialize = deessentialize
         self.filtration = filtration_values
 
         self._check_state()
@@ -25,6 +26,7 @@ class Toplex:
             self._internal_filt_to_filt[i + 1] = v
 
         self._internal_filt = [self._filt_to_internal_filt[v] for v in filt]
+        self._internal_filt_to_filt[-1] = max(filt) if self.deessentialize else float('inf')
 
     def _simplex_to_string_iter(self):
         def num_iter(simplex, filtration_value):
@@ -46,13 +48,14 @@ class Toplex:
         return header + vertices
 
     def _convert_dgm_from_internal_filt_to_filt(self, dgm):
-        points = [p for p in dgm if p[1] != -1]
-        essential_points = [p for p in dgm if p[1] == -1]
+        # points = [p for p in dgm if p[1] != -1]
+        # essential_points = [p for p in dgm if p[1] == -1]
 
-        points = [[self._internal_filt_to_filt[p[0]], self._internal_filt_to_filt[p[1]]] for p in points]
-        essential_points = [[self._internal_filt_to_filt[p[0]], float('inf')] for p in essential_points]
+        points = [[self._internal_filt_to_filt[p[0]], self._internal_filt_to_filt[p[1]]] for p in dgm]
+        # essential_points = [[self._internal_filt_to_filt[p[0]], float('inf')] for p in essential_points]
 
-        return points + essential_points
+        # return points + essential_points
+        return points
 
     def calculate_persistence_diagrams(self):
 
@@ -71,7 +74,7 @@ class Toplex:
         return return_value
 
 
-def toplex_persistence_diagrams(toplices: [tuple], filtration_values: []):
+def toplex_persistence_diagrams(toplices: [tuple], filtration_values: [], deessentialize=False):
     """
     Calculates the persistence diagrams for the given toplex using the given
     filtration. A toplex is a notion of a simplicial complex where just the
@@ -81,11 +84,16 @@ def toplex_persistence_diagrams(toplices: [tuple], filtration_values: []):
     :param toplices: List of toplices given as numeric tuples.
     The numeric value of each dimension of a toplix tuple stands
     for a vertex, e.g. [1, 2, 3] is the 2 simplex built from the vertices 1, 2, 3.
+
     :param filtration_values: List which gives the filtration value of each toplix
     enlisted in toplices.
-    :return: [[(tuple)]]
+
+    :param deessentialize: If True the death-time of essential classes is mapped to max(filtration_values).
+    If False the death time is mapped to float('inf').
+
+    :return: [[[]]
     """
-    toplex = Toplex(toplices, filtration_values)
+    toplex = Toplex(toplices, filtration_values, deessentialize=deessentialize)
     return toplex.calculate_persistence_diagrams()
 
 
