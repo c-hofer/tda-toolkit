@@ -199,7 +199,17 @@ class _PersistenceDiagramFile(_DIPHAFile):
         self.points = list(points)
 
     def write_to_binary_file(self, f):
-        raise NotImplementedError()
+        super(_PersistenceDiagramFile, self).write_to_binary_file(f)  # Base class part
+
+        f.write(_pack(self._file_type_number, int))
+
+        number_of_points = len(self.points)
+        f.write(_pack(number_of_points, int))
+
+        for dimension, birth_time, death_time in self.points:
+            f.write(_pack(dimension, int))
+            f.write(_pack(birth_time, float))
+            f.write(_pack(death_time, float))
 
     @staticmethod
     def load_from_binary_file(f):
