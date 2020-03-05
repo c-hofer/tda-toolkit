@@ -60,7 +60,7 @@ A short overview of the main features. For each of feature, there exists a tutor
 Uses `Perseus` to calculate persistence diagrams of filtrated Toplex. [Tutorial](https://github.com/c-hofer/tda-toolkit/blob/master/tutorials/toplex_persistence_diagrams.ipynb)
 
 ### `cubical_complex_persistence_diagrams`
-Uses `DIPHA` to calculate persistence diagrams of a filtrated cubical complex. [Tutorial](https://github.com/c-hofer/tda-toolkit/blob/master/tutorials/tutorials/cubical_complex_persistence_diagrams.ipynb)
+Uses `DIPHA` to calculate persistence diagrams of a filtrated cubical complex. [Tutorial](https://github.com/c-hofer/tda-toolkit/blob/master/tutorials/cubical_complex_persistence_diagrams.ipynb)
 
 ### `calculate_discrete_NPHT_2d`
 Calculates a *normalized barycentric persistent homology transform* of a given binary 2D cubical complex.[Tutorial](https://github.com/c-hofer/tda-toolkit/blob/master/tutorials/discrete_2d_npht.ipynb)
